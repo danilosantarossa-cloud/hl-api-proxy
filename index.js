@@ -72,6 +72,18 @@ async function consultarEvento(container, tipo) {
 });
 
 const PORT = process.env.PORT || 3000;
+const dns = require('dns');
+
+app.get('/test-dns', (req, res) => {
+  dns.lookup('api.hapag-lloyd.com', (err, address) => {
+    if (err) {
+      res.json({ error: err.message });
+    } else {
+      res.json({ address });
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en puerto ${PORT}`);
 });
